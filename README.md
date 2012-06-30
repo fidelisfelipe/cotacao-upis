@@ -1,4 +1,1 @@
-Projeto-Cotacao-de-Produtos
-===========================
-
-Projeto de cotaÃ§Ã£o de produtos entre Compradores e Fornecedores
+Projeto de cotação 2012
