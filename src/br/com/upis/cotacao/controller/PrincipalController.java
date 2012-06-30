@@ -9,9 +9,7 @@ import br.com.caelum.vraptor.Result;
 
 @Resource
 public class PrincipalController {
-	/**
-	 * 
-	 */
+
 	private final Result result;
 
 	public PrincipalController(Result result) {
@@ -19,17 +17,14 @@ public class PrincipalController {
 		this.result = result;
 	}
 	//Entrada
-	@Get
-	@Path({"","","/"})
+	@Get @Path({"","","/"})
 	public void index(){}
 
-	@Get
-	@Path("/datas")
+	@Get @Path("/datas")
 	public void datas(){
 		result.include("date", new Date());
 	}
-	@Get
-	@Path("/info")
+	@Get @Path("/info")
 	public void info(){
 	}
 
