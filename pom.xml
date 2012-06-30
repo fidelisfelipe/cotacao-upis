@@ -7,15 +7,11 @@
   <description>Cotação de Produtos</description>
   
   <dependencies>
-  	<dependency>
-  		<groupId>br.com.caelum</groupId>
-  		<artifactId>vraptor</artifactId>
-  	</dependency>
 	<dependency>
 		<groupId>br.com.caelum</groupId>
 		<artifactId>vraptor</artifactId>
 		<version>3.4.1</version>
-	</dependency>
+	</dependency>	
   </dependencies>
 
 </project>
