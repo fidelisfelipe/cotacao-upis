@@ -23,10 +23,11 @@ public AutenticadorInterceptor(Result result, UsuarioWeb usuario) {
 	this.usuario = usuario;
 }
 
+//apenas intercepta se o usuario nao estiver logado e o metodo for anotado
 public boolean accepts(ResourceMethod metodo){
 	return !this.usuario.isLogon() && metodo.containsAnnotation(ControleUsuario.class);
 }
-
+//se interceptou, encaminha a principal com msg
 public void intercept(InterceptorStack stack, ResourceMethod metodo, Object controller) throws InterceptionException {
 	result.include("msg","É necessário estar logado para acessar esta funcionalidade...");
 	result.forwardTo(PrincipalController.class).index();

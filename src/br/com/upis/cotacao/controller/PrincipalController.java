@@ -6,8 +6,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.upis.cotacao.login.UsuarioWeb;
 import br.com.upis.cotacao.login.AutenticadorInterceptor.ControleUsuario;
+import br.com.upis.cotacao.login.UsuarioWeb;
 
 @Resource
 public class PrincipalController {
@@ -21,7 +21,7 @@ public class PrincipalController {
 		this.usuario = usuario;
 	}
 	//Entrada
-	@Get @Path({"","","/"})
+	@Get @Path({"","/"})
 	public void index(){}
 	
 	@Get @Path("/logon")
