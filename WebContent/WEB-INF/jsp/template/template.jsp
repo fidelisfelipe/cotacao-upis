@@ -5,6 +5,14 @@
 <title>Cotação Upis</title>
 </head>
 <body>
+
+<!-- Login -->
+<a href="<c:url value="/logon"/>">Logon</a>|
+<a href="<c:url value="/logout"/>">Logout</a>
+<c:if test="${usuario.logon}">
+	Logado
+</c:if>
+
 <!-- MENU -->
 <div id="DivMenu">
 <%@include file="menus.jsp" %>
