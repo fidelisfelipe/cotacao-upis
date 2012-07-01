@@ -6,10 +6,11 @@ import br.com.caelum.vraptor.ioc.SessionScoped;
 @Component
 @SessionScoped
 public class UsuarioWeb {
-
+	//TODO: Inserir log4j
 	private boolean logon;
 
 	public boolean isLogon() {
+		
 		return logon;
 	}
 

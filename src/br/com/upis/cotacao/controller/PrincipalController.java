@@ -24,12 +24,17 @@ public class PrincipalController {
 	@Get @Path({"","/"})
 	public void index(){}
 	
+	@Get @Path("/sign-in")
+	public void logon(){}
+	
+
 	@Get @Path("/logon")
 	public void logonUsuario(){
-		usuario.setLogin();
+		realizarLogon();
 		result.forwardTo(this).index();
 	}
 	
+	@ControleUsuario
 	@Get @Path("/logout")
 	public void logoutUsuario(){
 		usuario.setLogout();
@@ -45,5 +50,16 @@ public class PrincipalController {
 	@Get @Path("/info")
 	public void info(){
 	}
-
+	
+	@ControleUsuario
+	@Get @Path("/form")
+	public void formulario(){}
+	
+	
+	//Metodos de chamados de negócio
+	private void realizarLogon() {
+		//TODO: o negocio para realizar logon de usuario entrará aki
+		usuario.setLogin();
+	}
+	
 }
