@@ -7,7 +7,7 @@
 <!-- Scripts -->
 
 <%@include file="headerJquery.jsp"%>
-<%@ include file="headerValidacao.jsp" %>
+
 </head>
 <body>
 

@@ -2,7 +2,7 @@
 
 <tiles:insertTemplate template="/WEB-INF/jsp/template/template.jsp">
 	<tiles:putAttribute name="body">
-
+<%@include file="../template/headerValidacao.jsp"%>
 
 <script type="text/javascript">
 $().ready(function() {
