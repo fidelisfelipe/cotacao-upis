@@ -30,8 +30,6 @@ $().ready(function() {
 
 </style>
 
-</head>
-<body>
 
 <form id="form" method="get" action="<c:url value="/logon"/>" >
 
