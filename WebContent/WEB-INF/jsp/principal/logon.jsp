@@ -27,7 +27,7 @@ $().ready(function() {
 #commentForm { width: 500px; }
 #commentForm label { width: 250px; }
 #commentForm label.error, #commentForm input.submit { margin-left: 253px; }
-
+ 
 </style>
 
 
