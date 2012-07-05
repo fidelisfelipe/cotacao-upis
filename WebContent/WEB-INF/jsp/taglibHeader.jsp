@@ -6,4 +6,3 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 <fmt:setLocale value="pt_br" />
-

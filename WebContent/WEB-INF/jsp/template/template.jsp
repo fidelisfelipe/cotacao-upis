@@ -17,9 +17,19 @@
 </div>
 <!-- MSG -->
 <c:if test="${not empty msg}">
-<div id="DivMsg">
+<div id="DivMsg" >
 ${msg}
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#DivMsg").css("background","yellow");
+	$("#DivMsg").hide();
+	$("#DivMsg").show(1000);
+	$("#DivMsg").hide(2000);
+});
+</script>
+
 </c:if>
 
 <!-- CONTEUDO -->
