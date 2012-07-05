@@ -5,18 +5,18 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.upis.cotacao.modelo.Categoria;
-import br.com.upis.cotacao.negocio.CategoriaNegocio;
+import br.com.upis.cotacao.modelo.Marca;
+import br.com.upis.cotacao.negocio.MarcaNegocio;
 
 @Resource
-@Path("/categoria")
-public class CategoriaController {
-	private final String contexto = "categoria";
+@Path("/marca")
+public class MarcaController {
+	private final String contexto = "marca";
 
 	private final Result result;
-	private final CategoriaNegocio negocio;
+	private final MarcaNegocio negocio;
 
-	public CategoriaController(Result result, CategoriaNegocio negocio) {
+	public MarcaController(Result result, MarcaNegocio negocio) {
 		this.result = result;
 		this.negocio = negocio;
 	}
@@ -34,13 +34,13 @@ public class CategoriaController {
 
 	@Post
 	@Path("/novo")
-	public void novo(Categoria categoria) {
+	public void novo(Marca marca) {
 
-		String msg = negocio.salvar(categoria);
+		String msg = negocio.salvar(marca);
+		
+		result.include("msg",msg);
 
-		result.include("msg", msg);
-
-		result.include("categoria", categoria);
+		result.include("categoria", marca);
 		result.forwardTo(this).form();
 	}
 
