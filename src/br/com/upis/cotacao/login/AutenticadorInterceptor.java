@@ -25,7 +25,7 @@ public AutenticadorInterceptor(Result result, UsuarioWeb usuario) {
 
 //apenas intercepta se o usuario nao estiver logado e o metodo for anotado
 public boolean accepts(ResourceMethod metodo){
-	return !this.usuario.isLogon() && metodo.containsAnnotation(ControleUsuario.class);
+	return !this.usuario.isLogon() && metodo.containsAnnotation(Restrito.class);
 }
 //se interceptou, encaminha a principal com msg
 public void intercept(InterceptorStack stack, ResourceMethod metodo, Object controller) throws InterceptionException {
@@ -36,7 +36,7 @@ public void intercept(InterceptorStack stack, ResourceMethod metodo, Object cont
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ControleUsuario {}
+public @interface Restrito {}
 
 
 }

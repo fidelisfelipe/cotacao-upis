@@ -14,7 +14,6 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.view.Results;
-import br.com.upis.cotacao.login.AutenticadorInterceptor.ControleUsuario;
 import br.com.upis.cotacao.login.UsuarioWeb;
 
 @Resource
@@ -42,24 +41,20 @@ public class PrincipalController {
 		result.forwardTo(this).index();
 	}
 	
-	@ControleUsuario
 	@Get @Path("/logout")
 	public void logoutUsuario(){
 		usuario.setLogout();
 		result.forwardTo(this).index();
 	}
 	
-	@ControleUsuario
 	@Get @Path("/datas")
 	public void datas(){
 		result.include("date", new Date());
 	}
-	@ControleUsuario
 	@Get @Path("/info")
 	public void info(){
 	}
 	
-	@ControleUsuario
 	@Get @Path("/form")
 	public void formulario(){}
 	@Get @Path("/upfile")

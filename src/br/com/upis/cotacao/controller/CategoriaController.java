@@ -1,5 +1,10 @@
 package br.com.upis.cotacao.controller;
 
+import java.util.List;
+
+import org.hibernate.HibernateException;
+
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -20,27 +25,110 @@ public class CategoriaController {
 		this.result = result;
 		this.negocio = negocio;
 	}
-	
-	public void form(){
-		result.include("contexto",contexto);
+
+	public void form(String nameDivShow){		
+		result.include("contexto", this.contexto);
+		result.include("titulo", this.contexto);
+		result.include("nameDivShow",nameDivShow);
 	}
 	
-	@Get @Path("/novo")
-	public void novo(){
-		//faz algo pra novo
-		result.forwardTo(this).form();
+	private void listarRegistros(){
+		List<Categoria> categoriaList = negocio.listarTudo();
+		result.include("categoriaList", categoriaList);
 	}
 	
-	@Post @Path("/novo")
-	public void novo(Categoria categoria){
+	@Get
+	@Path({"/",""})
+	public void lista() {
+		List<Categoria> categoriaList = negocio.listarTudo();
+		result.include("categoriaList", categoriaList);
+		result.include("objectList", categoriaList);
+		result.include("categoriasParaAssociacaoList", categoriaList);
+		result.forwardTo(this).form("lista");
+	}
+
+	@Get
+	@Path("/novo")
+	public void novo() {
+		List<Categoria> categoriaList = negocio.listarTudo();
+		Categoria categoria = recuperaObjetoDoResult();
 		
-		String msg = negocio.salvar(categoria);
+		negocio.ajustaListaDeAssociacao(categoriaList, categoria);
+		listarRegistros();
+		result.include("categoriasParaAssociacaoList", categoriaList);
+		result.forwardTo(this).form("novo");
+	}
+
+	@Get
+	@Path("/{id}")
+	public void edita(Integer id) {
+		result.on(HibernateException.class).forwardTo(this).lista();
+		
+		Categoria categoria = negocio.carrega(id);
+		result.include("categoria", categoria);
+		
+		result.forwardTo(this).novo();
+	}
+
+	@Post
+	@Path({"/",""})
+	public void adiciona(final Categoria categoria) {
+		result.on(HibernateException.class).forwardTo(this).novo();
+		
+		String msg = negocio.adiciona(categoria);
+		
+		defineMsg(msg);
+	
+		result.include("categoria", categoria);
+		result.forwardTo(this).novo();
+	}
+	
+	@Post
+	@Path("/{categoria.id}")
+	public void altera(Categoria categoria) {
+		result.on(HibernateException.class).forwardTo(this).lista();
+		String msg = negocio.altera(categoria);
+		
+		result.include("msg", msg);
+		result.include("categoria", categoria);
+		result.forwardTo(this).novo();
+	}
+	
+	@Delete
+	@Path("/{id}")
+	public void remove(Integer id) {
+		result.on(HibernateException.class).forwardTo(this).lista();
+		
+		String msg = negocio.remove(id);
 		
 		result.include("msg",msg);
-		
-		result.include("categoria",categoria);
-		result.forwardTo(this).form();
+		result.forwardTo(this).lista();
 	}
 	
+	@Post @Path("/buscar")
+	public void busca(String criterio) {
+		List<Categoria> categoriaList = negocio.buscar(criterio);
+		
+		result.include("contexto", this.contexto);
+		result.include("criterio", "Resultado da busca por <b>\""+criterio+"\"</b><br />");
+		
+		result.include("categoriaList", categoriaList);
+		result.include("objectList", categoriaList);
+		
+		result.forwardTo(this).form("lista");
+	}
+
+	private Categoria recuperaObjetoDoResult() {
+		Categoria categoria = null;
+		if(result.included().containsKey("categoria"))
+			categoria = (Categoria)result.included().get("categoria");
+
+		return categoria;
+	}
 	
+	private void defineMsg(String msg) {
+		result.include("msg",msg);
+		if(msg != null)
+		result.include("nameDivShow","DivErro");
+	}
 }
